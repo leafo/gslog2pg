@@ -1,6 +1,7 @@
 
 dependences = {
 	"luafilesystem",
+	"lapis",
 	"pgmoon",
-	"csv"
+	"ansicolors"
 }
