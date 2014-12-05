@@ -22,3 +22,14 @@ p db.query [[
     substring(cs_object from '\d+') game_id
   from requests group by game_id order by sum(sc_bytes) desc limit 20;
 ]]
+
+-- requests and bandwidth per day
+p db.query [[
+  select d, count(*), pg_size_pretty(sum(sc_bytes)) from
+    (select
+      date_trunc('day', to_timestamp(time_micros / 1000000)) as d,
+      sc_bytes
+      from requests) as dates
+    group by d
+    order by d desc;
+]]
